@@ -7,10 +7,10 @@ import { X, ZoomIn } from "lucide-react";
 const Defs = () => (
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#c9a96e" />
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
     </marker>
     <marker id="arr-dim" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#3a3a3a" />
+      <polygon points="0 0, 8 3, 0 6" fill="#d1d5db" />
     </marker>
   </defs>
 );
@@ -23,15 +23,15 @@ const Box = ({
   <g>
     <rect
       x={x} y={y} width={w} height={h} rx={3}
-      fill={accent ? "rgba(201,169,110,0.08)" : "#141414"}
-      stroke={accent ? "rgba(201,169,110,0.35)" : "#2a2a2a"}
+      fill={accent ? "rgba(59,130,246,0.07)" : "#f9fafb"}
+      stroke={accent ? "rgba(59,130,246,0.35)" : "#e5e7eb"}
       strokeWidth={1}
     />
-    <text x={x + w / 2} y={y + (sublabel ? h / 2 - 5 : h / 2 + 4)} textAnchor="middle" fill="#ede8df" fontFamily="ui-monospace,monospace" fontSize={11}>
+    <text x={x + w / 2} y={y + (sublabel ? h / 2 - 5 : h / 2 + 4)} textAnchor="middle" fill="#374151" fontFamily="ui-monospace,monospace" fontSize={11}>
       {label}
     </text>
     {sublabel && (
-      <text x={x + w / 2} y={y + h / 2 + 11} textAnchor="middle" fill="#9a948c" fontFamily="ui-monospace,monospace" fontSize={9}>
+      <text x={x + w / 2} y={y + h / 2 + 11} textAnchor="middle" fill="#9ca3af" fontFamily="ui-monospace,monospace" fontSize={9}>
         {sublabel}
       </text>
     )}
@@ -41,14 +41,14 @@ const Box = ({
 const Arrow = ({ x1, y1, x2, y2, dim }: { x1: number; y1: number; x2: number; y2: number; dim?: boolean }) => (
   <line
     x1={x1} y1={y1} x2={x2} y2={y2}
-    stroke={dim ? "#3a3a3a" : "#c9a96e"}
+    stroke={dim ? "#d1d5db" : "#3b82f6"}
     strokeWidth={dim ? 1 : 1.5}
     markerEnd={dim ? "url(#arr-dim)" : "url(#arr)"}
   />
 );
 
 const Label = ({ x, y, text }: { x: number; y: number; text: string }) => (
-  <text x={x} y={y} fill="#524f4a" fontFamily="ui-monospace,monospace" fontSize={9} letterSpacing="0.1em" textAnchor="middle">
+  <text x={x} y={y} fill="#9ca3af" fontFamily="ui-monospace,monospace" fontSize={9} letterSpacing="0.1em" textAnchor="middle">
     {text.toUpperCase()}
   </text>
 );
@@ -290,14 +290,14 @@ function DiagSSO() {
 }
 
 const DIAGRAMS = [
-  { id: "nemccu", name: "NEMCCU", type: "FinTech / SaaS", Diagram: DiagNEMCCU },
-  { id: "listen-on-repeat", name: "Listen on Repeat", type: "Media / Streaming", Diagram: DiagListenOnRepeat },
-  { id: "skills-transfers", name: "Skills Transfers", type: "EdTech / SaaS", Diagram: DiagSkillsTransfers },
-  { id: "pims", name: "PIMS", type: "GovTech / Enterprise", Diagram: DiagPIMS },
-  { id: "yacht-cloud", name: "Yacht Cloud", type: "Maritime / Marketplace", Diagram: DiagYachtCloud },
-  { id: "fleetpro", name: "FleetPro", type: "Logistics / IoT", Diagram: DiagFleetPro },
-  { id: "loyalty-platform", name: "Loyalty Platform", type: "MarTech / SaaS", Diagram: DiagLoyalty },
-  { id: "sso-gateway", name: "Enterprise SSO Gateway", type: "Security / Enterprise", Diagram: DiagSSO },
+  { id: "nemccu",           name: "NEMCCU",                type: "FinTech / SaaS",        Diagram: DiagNEMCCU },
+  { id: "listen-on-repeat", name: "Listen on Repeat",      type: "Media / Streaming",     Diagram: DiagListenOnRepeat },
+  { id: "skills-transfers", name: "Skills Transfers",      type: "EdTech / SaaS",         Diagram: DiagSkillsTransfers },
+  { id: "pims",             name: "PIMS",                  type: "GovTech / Enterprise",  Diagram: DiagPIMS },
+  { id: "yacht-cloud",      name: "Yacht Cloud",           type: "Maritime / Marketplace",Diagram: DiagYachtCloud },
+  { id: "fleetpro",         name: "FleetPro",              type: "Logistics / IoT",       Diagram: DiagFleetPro },
+  { id: "loyalty-platform", name: "Loyalty Platform",      type: "MarTech / SaaS",        Diagram: DiagLoyalty },
+  { id: "sso-gateway",      name: "Enterprise SSO Gateway",type: "Security / Enterprise", Diagram: DiagSSO },
 ];
 
 export default function Architecture() {
@@ -305,71 +305,35 @@ export default function Architecture() {
   const active = DIAGRAMS.find((d) => d.id === expanded);
 
   return (
-    <section id="architecture" className="py-24 border-t border-[rgba(255,255,255,0.06)]">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <div className="section-label mb-4">
-            <span className="gold-line" />
-            Architecture Gallery
-          </div>
-          <h2
-            className="text-[clamp(2.5rem,5vw,4rem)] font-light text-[#ede8df] leading-tight"
-            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
-          >
-            How these systems
-            <br />
-            <span className="text-[#c9a96e] italic">actually fit together.</span>
-          </h2>
-          <p
-            className="mt-4 text-[#9a948c] text-sm max-w-lg"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
-          >
-            Click any diagram to expand it. These are real production architectures —
-            simplified for clarity but accurate in structure.
+    <section id="architecture" className="py-20 bg-white border-y border-gray-100">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="mb-10">
+          <p className="text-sm font-medium text-blue-600 mb-2">Architecture Gallery</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">How these systems fit together</h2>
+          <p className="text-gray-500 max-w-xl">
+            Real production architectures — simplified for clarity but accurate in structure. Click any diagram to expand.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
-          {DIAGRAMS.map((d, i) => (
-            <motion.button
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {DIAGRAMS.map((d) => (
+            <button
+              type="button"
               key={d.id}
               onClick={() => setExpanded(d.id)}
-              className="group relative border border-[rgba(255,255,255,0.06)] bg-[#0d0d0d] p-4 text-left hover:border-[rgba(201,169,110,0.25)] hover:bg-[#111] transition-all duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.4, delay: i * 0.04 }}
+              className="group text-left bg-gray-50 border border-gray-200 rounded-xl p-5 hover:border-blue-200 hover:shadow-sm transition-all duration-200"
             >
-              <div className="mb-3 opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none">
+              <div className="mb-4 pointer-events-none bg-white rounded-lg border border-gray-100 p-3">
                 <d.Diagram />
               </div>
-              <div className="border-t border-[rgba(255,255,255,0.06)] pt-3 flex items-start justify-between gap-2">
+              <div className="flex items-start justify-between gap-2">
                 <div>
-                  <div
-                    className="text-[#ede8df] text-sm font-medium group-hover:text-[#c9a96e] transition-colors"
-                    style={{ fontFamily: "var(--font-cormorant)", fontSize: "1rem" }}
-                  >
-                    {d.name}
-                  </div>
-                  <div
-                    className="text-[#524f4a] text-xs mt-0.5"
-                    style={{ fontFamily: "var(--font-jetbrains)" }}
-                  >
-                    {d.type}
-                  </div>
+                  <div className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{d.name}</div>
+                  <div className="text-xs text-gray-400 mt-0.5">{d.type}</div>
                 </div>
-                <ZoomIn
-                  size={14}
-                  className="shrink-0 mt-1 text-[#3a3a3a] group-hover:text-[#c9a96e] transition-colors"
-                />
+                <ZoomIn size={14} className="shrink-0 mt-0.5 text-gray-300 group-hover:text-blue-500 transition-colors" />
               </div>
-            </motion.button>
+            </button>
           ))}
         </div>
       </div>
@@ -383,38 +347,30 @@ export default function Architecture() {
             exit={{ opacity: 0 }}
             onClick={() => setExpanded(null)}
           >
-            <div className="absolute inset-0 bg-[rgba(0,0,0,0.88)] backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
             <motion.div
-              className="relative w-full max-w-4xl bg-[#0d0d0d] border border-[rgba(255,255,255,0.1)] p-6"
-              initial={{ scale: 0.94, opacity: 0 }}
+              className="relative w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-2xl p-6"
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.94, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-5">
                 <div>
-                  <div
-                    className="text-[#ede8df] text-2xl"
-                    style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}
-                  >
-                    {active.name}
-                  </div>
-                  <div
-                    className="text-[#9a948c] text-xs mt-1"
-                    style={{ fontFamily: "var(--font-jetbrains)" }}
-                  >
-                    {active.type}
-                  </div>
+                  <div className="text-xl font-bold text-gray-900">{active.name}</div>
+                  <div className="text-xs text-gray-400 mt-0.5">{active.type}</div>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setExpanded(null)}
-                  className="text-[#524f4a] hover:text-[#ede8df] transition-colors"
+                  className="text-gray-400 hover:text-gray-700 transition-colors"
+                  aria-label="Close diagram"
                 >
-                  <X size={20} />
+                  <X size={20} aria-hidden="true" />
                 </button>
               </div>
-              <div className="bg-[#080808] border border-[rgba(255,255,255,0.04)] p-4">
+              <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
                 <active.Diagram />
               </div>
             </motion.div>

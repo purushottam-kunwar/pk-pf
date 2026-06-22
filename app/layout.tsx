@@ -1,45 +1,49 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-sans",
   display: "swap",
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-jetbrains",
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Purushottam Kunwar — Senior Backend Engineer",
   description:
-    "Backend systems engineer specializing in enterprise SaaS, distributed systems, and identity protocols. 6+ years building production systems across fintech, govtech, maritime, and logistics.",
-  keywords: ["backend engineer", "Nepal", "Kathmandu", "FastAPI", "Laravel", "Node.js", "enterprise systems"],
+    "Senior Backend Engineer with 6+ years building distributed systems, enterprise platforms, and identity infrastructure. Available for remote international roles.",
+  keywords: [
+    "backend engineer",
+    "senior backend engineer",
+    "distributed systems",
+    "Nepal",
+    "remote",
+    "FastAPI",
+    "Laravel",
+    "AWS",
+    "PostgreSQL",
+    "enterprise",
+  ],
   authors: [{ name: "Purushottam Kunwar" }],
   openGraph: {
     title: "Purushottam Kunwar — Senior Backend Engineer",
-    description: "8 enterprise systems. 10TB+ data. 15+ enterprise clients. Senior Backend Engineer in Kathmandu.",
+    description:
+      "8 production systems. 15+ enterprise clients. Senior Backend Engineer open to remote international roles.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${jetbrains.variable}`}>
-      <body className="bg-[#0a0a0a] text-[#ede8df] antialiased">
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+      <body className="bg-white text-gray-900 antialiased">
         {children}
       </body>
     </html>

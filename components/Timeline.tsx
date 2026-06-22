@@ -1,113 +1,110 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { TIMELINE } from "@/lib/data";
 
 export default function Timeline() {
+  const [open, setOpen] = useState<number | null>(TIMELINE.length - 1);
+
   return (
-    <section id="timeline" className="py-24 border-t border-[rgba(255,255,255,0.06)]">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <div className="section-label mb-4">
-            <span className="gold-line" />
-            Career Timeline
-          </div>
-          <h2
-            className="text-[clamp(2.5rem,5vw,4rem)] font-light text-[#ede8df] leading-tight"
-            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
-          >
-            Six years of systems,
-            <br />
-            <span className="text-[#c9a96e] italic">one engineer.</span>
-          </h2>
-        </motion.div>
+    <section id="timeline" className="py-20 bg-white">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="mb-12">
+          <p className="text-sm font-medium text-blue-600 mb-2">Experience</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">6 years of production engineering</h2>
+          <p className="text-gray-500">Junior developer to senior backend engineer — shipping real systems throughout.</p>
+        </div>
 
-        <div className="relative">
-          <div
-            className="absolute left-0 top-0 bottom-0 w-px ml-[5.5rem]"
-            style={{ background: "linear-gradient(to bottom, rgba(201,169,110,0.4), rgba(201,169,110,0.05))" }}
-          />
+        <div className="space-y-0">
+          {TIMELINE.map((entry, i) => {
+            const isOpen   = open === i;
+            const isLatest = i === TIMELINE.length - 1;
+            const isLast   = i === TIMELINE.length - 1;
 
-          <div className="space-y-0">
-            {TIMELINE.map((entry, i) => (
-              <motion.div
-                key={i}
-                className="relative flex gap-6 sm:gap-10"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
-              >
-                <div className="w-20 shrink-0 pt-6 text-right">
-                  <span
-                    className="text-[#c9a96e] text-xs font-medium leading-relaxed"
-                    style={{ fontFamily: "var(--font-jetbrains)" }}
-                  >
-                    {entry.year}
-                  </span>
+            return (
+              <div key={i} className="flex gap-4">
+                {/* Dot + connector */}
+                <div className="flex flex-col items-center shrink-0 pt-5">
+                  <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center z-10 ${isLatest ? "border-blue-500 bg-white" : "border-gray-200 bg-white"}`}>
+                    <div className={`w-1.5 h-1.5 rounded-full ${isLatest ? "bg-blue-500" : "bg-gray-300"}`} />
+                  </div>
+                  {!isLast && <div className="flex-1 w-px bg-gray-200 mt-1" />}
                 </div>
 
-                <div className="relative pt-7">
-                  <div
-                    className="absolute left-[-5px] top-8 w-2.5 h-2.5 rounded-full border-2 border-[#c9a96e] bg-[#0a0a0a]"
-                  />
-                </div>
-
-                <div className="flex-1 pb-12 pt-6">
-                  <div className="mb-1">
-                    <span
-                      className="text-[#ede8df] text-lg"
-                      style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}
-                    >
-                      {entry.role}
-                    </span>
-                  </div>
-                  <div
-                    className="text-[#9a948c] text-xs mb-4"
-                    style={{ fontFamily: "var(--font-jetbrains)" }}
+                {/* Card */}
+                <div className="flex-1 pb-4">
+                  <button
+                    type="button"
+                    className="w-full text-left border border-gray-200 rounded-xl overflow-hidden hover:border-blue-200 transition-colors group"
+                    onClick={() => setOpen(isOpen ? null : i)}
                   >
-                    {entry.company} · {entry.location}
-                  </div>
-                  <p
-                    className="text-[#9a948c] text-sm leading-relaxed mb-4 max-w-2xl"
-                    style={{ fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {entry.description}
-                  </p>
+                    <div className="px-5 py-4 bg-white">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                            <span className="text-xs text-blue-600 font-semibold">{entry.year}</span>
+                            {isLatest && (
+                              <span className="text-xs px-1.5 py-0.5 bg-green-50 text-green-700 border border-green-200 rounded">Current</span>
+                            )}
+                          </div>
+                          <div className="text-base font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            {entry.role}
+                          </div>
+                          <div className="text-sm text-gray-400 mt-0.5">
+                            {entry.company} · {entry.location}
+                          </div>
+                        </div>
+                        <ChevronDown
+                          size={15}
+                          className={`shrink-0 mt-1 text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        />
+                      </div>
+                    </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {entry.highlights.map((h) => (
-                      <span
-                        key={h}
-                        className="text-xs text-[#c9a96e] border border-[rgba(201,169,110,0.2)] bg-[rgba(201,169,110,0.05)] px-2.5 py-1"
-                        style={{ fontFamily: "var(--font-jetbrains)" }}
-                      >
-                        {h}
-                      </span>
-                    ))}
-                  </div>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 pb-5 pt-0 border-t border-gray-100 bg-gray-50 space-y-4">
+                            <p className="text-sm text-gray-600 leading-relaxed pt-4">{entry.description}</p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {entry.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs text-[#524f4a] bg-[#141414] border border-[rgba(255,255,255,0.05)] px-2.5 py-1"
-                        style={{ fontFamily: "var(--font-jetbrains)" }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                            <div>
+                              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Key Achievements</p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {entry.highlights.map((h) => (
+                                  <span key={h} className="text-xs px-2.5 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded">
+                                    {h}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div>
+                              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Technologies</p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {entry.tech.map((t) => (
+                                  <span key={t} className="text-xs px-2 py-0.5 bg-white border border-gray-200 text-gray-500 rounded">
+                                    {t}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </button>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

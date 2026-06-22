@@ -1,162 +1,127 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowDown, MapPin } from "lucide-react";
+import { ArrowRight, Download, MapPin } from "lucide-react";
 
-const TECH = [
-  "FastAPI", "Laravel", "Node.js", "Grails", "PostgreSQL", "MySQL",
-  "Elasticsearch", "Redis", "Docker", "AWS", "OAuth 2.0", "SAML 2.0",
-  "WebSocket", "GraphQL", "Python", "TypeScript", "PHP", "JWT",
-  "FastAPI", "Laravel", "Node.js", "Grails", "PostgreSQL", "MySQL",
-  "Elasticsearch", "Redis", "Docker", "AWS", "OAuth 2.0", "SAML 2.0",
-  "WebSocket", "GraphQL", "Python", "TypeScript", "PHP", "JWT",
+const LinkedinIcon = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+  </svg>
+);
+
+const GithubIcon = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+  </svg>
+);
+
+const STACK = ["Go", "Laravel", "FastAPI", "Node.js", "PostgreSQL", "Redis", "AWS", "Docker"];
+
+const STATS = [
+  { value: "6+", label: "Years Experience" },
+  { value: "8+", label: "Systems Built" },
+  { value: "15+", label: "Enterprise Clients" },
+  { value: "10TB+", label: "Data Managed" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% -20%, rgba(201,169,110,0.07) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 right-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent)" }}
-        />
-      </div>
+    <section className="min-h-screen flex flex-col bg-white pt-16">
 
-      <div className="relative flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 pt-28 pb-16 w-full">
-        <motion.div
-          className="flex items-center gap-3 mb-8"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <span
-            className="text-[#c9a96e] text-xs tracking-[0.2em] uppercase"
-            style={{ fontFamily: "var(--font-jetbrains)" }}
-          >
-            Senior Backend Engineer
-          </span>
-          <span className="h-px flex-1 max-w-12 bg-[rgba(201,169,110,0.4)]" />
-          <span className="flex items-center gap-1.5 text-[#9a948c] text-xs" style={{ fontFamily: "var(--font-jetbrains)" }}>
-            <MapPin size={11} />
-            Kathmandu, Nepal
-          </span>
-          <span className="flex items-center gap-1.5 text-xs" style={{ fontFamily: "var(--font-jetbrains)" }}>
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-            </span>
-            <span className="text-green-400">Available</span>
-          </span>
-        </motion.div>
+      {/* Main content */}
+      <div className="flex-1">
+        <div className="max-w-5xl mx-auto px-6 py-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-        <div className="overflow-hidden">
-          <motion.h1
-            className="text-[clamp(3.5rem,10vw,9rem)] leading-[0.9] font-light tracking-tight text-[#ede8df]"
-            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            Purushottam
-            <br />
-            <span className="italic text-[#c9a96e]">Kunwar</span>
-          </motion.h1>
-        </div>
-
-        <motion.p
-          className="mt-8 max-w-xl text-[#9a948c] text-base leading-relaxed"
-          style={{ fontFamily: "var(--font-dm-sans)" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          I build the systems companies depend on — pension platforms for governments,
-          identity gateways for enterprises, fleet management for logistics companies.
-          6+ years turning complex requirements into reliable production software.
-        </motion.p>
-
-        <motion.div
-          className="mt-10 flex flex-wrap gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
-        >
-          <a
-            href="#work"
-            className="group flex items-center gap-2 px-6 py-3 bg-[#c9a96e] text-[#0a0a0a] text-sm font-medium hover:bg-[#e8c99a] transition-colors duration-200"
-            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
-          >
-            View my work
-            <ArrowDown size={15} className="group-hover:translate-y-0.5 transition-transform" />
-          </a>
-          <a
-            href="#contact"
-            className="flex items-center gap-2 px-6 py-3 border border-[rgba(255,255,255,0.12)] text-[#ede8df] text-sm hover:border-[rgba(201,169,110,0.4)] hover:text-[#c9a96e] transition-all duration-200"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
-          >
-            Get in touch
-          </a>
-        </motion.div>
-
-        <motion.div
-          className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-px border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.06)]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          {[
-            { value: "8+", label: "Enterprise Systems" },
-            { value: "6+", label: "Years Building" },
-            { value: "10TB+", label: "Data at Scale" },
-            { value: "15+", label: "Enterprise Clients" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-[#0a0a0a] px-6 py-5 group hover:bg-[#111] transition-colors"
-            >
-              <div
-                className="text-3xl text-[#c9a96e] font-light mb-1"
-                style={{ fontFamily: "var(--font-cormorant)" }}
-              >
-                {stat.value}
+            {/* Left */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 border border-green-200 rounded-full mb-6">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm text-green-700 font-medium">Available for remote roles</span>
               </div>
-              <div
-                className="text-[#524f4a] text-xs tracking-wide uppercase"
-                style={{ fontFamily: "var(--font-jetbrains)" }}
-              >
-                {stat.label}
+
+              <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-3">
+                Hi, I&apos;m Purushottam<br />
+                <span className="text-blue-600">Kunwar</span>
+              </h1>
+
+              <p className="text-xl text-gray-500 font-medium mb-6">
+                Senior Backend Engineer
+              </p>
+
+              <p className="text-gray-600 leading-relaxed mb-8 text-base max-w-md">
+                I design and build distributed systems, enterprise platforms,
+                identity infrastructure, and high-scale backend systems that
+                serve real users in production.
+              </p>
+
+              <div className="flex flex-wrap gap-3 mb-8">
+                <a
+                  href="#projects"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  View My Work <ArrowRight size={16} />
+                </a>
+                <a
+                  href="/Purushottam_Kunwar_CV.pdf"
+                  download
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  <Download size={15} /> Resume
+                </a>
+              </div>
+
+              <div className="flex items-center gap-5">
+                <a href="https://www.linkedin.com/in/purushottam-kunwar-543032179/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-blue-600 transition-colors">
+                  <LinkedinIcon />
+                </a>
+                <a href="https://github.com/purushottam-kunwar" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-gray-400 hover:text-gray-900 transition-colors">
+                  <GithubIcon />
+                </a>
+                <span className="flex items-center gap-1.5 text-sm text-gray-400">
+                  <MapPin size={13} /> Kathmandu, Nepal
+                </span>
               </div>
             </div>
-          ))}
-        </motion.div>
+
+            {/* Right — profile card */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-sm bg-gray-50 border border-gray-200 rounded-2xl p-8">
+                {/* Avatar */}
+                <div className="w-20 h-20 rounded-2xl bg-blue-600 flex items-center justify-center mb-6">
+                  <span className="text-3xl font-bold text-white">PK</span>
+                </div>
+
+                <h2 className="text-lg font-bold text-gray-900 mb-1">Purushottam Kunwar</h2>
+                <p className="text-sm text-gray-500 mb-6">Senior Backend Engineer · Kathmandu, Nepal</p>
+
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  {STATS.map(s => (
+                    <div key={s.label} className="bg-white rounded-xl p-4 border border-gray-100">
+                      <div className="text-xl font-bold text-blue-600">{s.value}</div>
+                      <div className="text-xs text-gray-400 mt-0.5">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <motion.div
-        className="relative overflow-hidden border-t border-[rgba(255,255,255,0.06)]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
-      >
-        <div className="flex whitespace-nowrap">
-          <div className="marquee-track flex">
-            {TECH.map((t, i) => (
-              <span
-                key={i}
-                className="px-6 py-3 text-[#3a3a3a] text-xs tracking-[0.15em] uppercase border-r border-[rgba(255,255,255,0.04)] hover:text-[#c9a96e] transition-colors"
-                style={{ fontFamily: "var(--font-jetbrains)" }}
-              >
+      {/* Tech stack row */}
+      <div className="border-t border-gray-100 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-6 py-5">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-xs text-gray-400 font-medium mr-2">Core Stack:</span>
+            {STACK.map(t => (
+              <span key={t} className="text-xs px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-lg font-medium">
                 {t}
               </span>
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

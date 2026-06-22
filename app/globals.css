@@ -1,156 +1,16 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-bg: #0a0a0a;
-  --color-bg2: #111111;
-  --color-bg3: #161616;
-  --color-surface: #1a1a1a;
-  --color-border: rgba(255,255,255,0.06);
-  --color-border2: rgba(255,255,255,0.12);
-  --color-text: #ede8df;
-  --color-t2: #9a948c;
-  --color-t3: #524f4a;
-  --color-gold: #c9a96e;
-  --color-gold2: #e8c99a;
-  --color-goldd: #b8924a;
-  --color-green: #4ade80;
-  --font-serif: var(--font-cormorant);
-  --font-sans: var(--font-dm-sans);
-  --font-mono: var(--font-jetbrains);
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: #0a0a0a;
-  color: #ede8df;
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  min-height: 100vh;
-  position: relative;
+  background: #ffffff;
+  color: #111827;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 100;
-  opacity: 0.45;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f9fafb; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #c9a96e;
-}
-
-::selection {
-  background: rgba(201,169,110,0.2);
-  color: #ede8df;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-.marquee-track {
-  animation: marquee 30s linear infinite;
-  will-change: transform;
-}
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-.cursor-blink {
-  animation: blink 1.1s step-end infinite;
-}
-
-.section-label {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #c9a96e;
-}
-
-.gold-line {
-  display: inline-block;
-  width: 32px;
-  height: 1px;
-  background: #c9a96e;
-  vertical-align: middle;
-  margin-right: 12px;
-}
-
-.diagram-box {
-  fill: #141414;
-  stroke: #2a2a2a;
-  stroke-width: 1;
-}
-
-.diagram-box-accent {
-  fill: rgba(201,169,110,0.08);
-  stroke: rgba(201,169,110,0.3);
-  stroke-width: 1;
-}
-
-.diagram-text {
-  fill: #ede8df;
-  font-family: ui-monospace, monospace;
-  font-size: 11px;
-}
-
-.diagram-text-sm {
-  fill: #9a948c;
-  font-family: ui-monospace, monospace;
-  font-size: 9px;
-}
-
-.diagram-arrow {
-  stroke: #c9a96e;
-  stroke-width: 1.5;
-  fill: none;
-  marker-end: url(#arrowhead);
-}
-
-.diagram-arrow-dim {
-  stroke: #3a3a3a;
-  stroke-width: 1;
-  fill: none;
-  marker-end: url(#arrowhead-dim);
-}
+::selection { background: #dbeafe; color: #1e40af; }

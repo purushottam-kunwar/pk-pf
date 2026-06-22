@@ -209,6 +209,14 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+export const SKILLS = {
+  backend: ["Go", "PHP / Laravel", "Python / FastAPI", "Node.js", "Grails / Java"],
+  databases: ["PostgreSQL", "MySQL", "Redis", "Elasticsearch", "MongoDB"],
+  cloud: ["AWS (EC2, S3, Lambda, SQS)", "Docker", "GitLab CI/CD", "Nginx", "Serverless"],
+  protocols: ["OAuth 2.0 / PKCE", "SAML 2.0", "JWT", "WebSocket", "GraphQL", "REST"],
+  frontend: ["React", "Vue.js", "InertiaJS", "Mapbox GL"],
+};
+
 export const TIMELINE: TimelineEntry[] = [
   {
     year: "2019",
