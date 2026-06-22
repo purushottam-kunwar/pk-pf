@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Download, MapPin } from "lucide-react";
+import { ArrowRight, Download, MapPin, Calendar, Briefcase } from "lucide-react";
 
 const LinkedinIcon = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
@@ -14,106 +14,124 @@ const GithubIcon = () => (
   </svg>
 );
 
-const STACK = ["Go", "Laravel", "FastAPI", "Node.js", "PostgreSQL", "Redis", "AWS", "Docker"];
+const STACK = ["Go", "Laravel", "FastAPI", "Node.js", "PostgreSQL", "Redis", "AWS", "Docker", "Elasticsearch", "MySQL", "RabbitMQ", "WebSockets"];
 
 const STATS = [
-  { value: "6+", label: "Years Experience" },
-  { value: "8+", label: "Systems Built" },
-  { value: "15+", label: "Enterprise Clients" },
-  { value: "10TB+", label: "Data Managed" },
+  { value: "6+",    label: "Years Experience", sub: "2019 – Present" },
+  { value: "8+",    label: "Systems Built",     sub: "Production grade" },
+  { value: "15+",   label: "Enterprise Clients",sub: "Across industries" },
+  { value: "10TB+", label: "Data Managed",      sub: "S3 + PostgreSQL" },
+];
+
+const HIGHLIGHTS = [
+  { icon: Briefcase, text: "Senior Backend Engineer at Azminds Pvt. Ltd." },
+  { icon: MapPin,    text: "Kathmandu, Nepal · UTC+5:45" },
+  { icon: Calendar,  text: "6+ years in distributed systems & enterprise platforms" },
 ];
 
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col bg-white pt-16">
+      <div className="flex-1 w-full px-10 xl:px-16 py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full items-start">
 
-      {/* Main content */}
-      <div className="flex-1">
-        <div className="max-w-5xl mx-auto px-6 py-16 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-            {/* Left */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 border border-green-200 rounded-full mb-6">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-green-700 font-medium">Available for remote roles</span>
-              </div>
-
-              <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-3">
-                Hi, I&apos;m Purushottam<br />
-                <span className="text-blue-600">Kunwar</span>
-              </h1>
-
-              <p className="text-xl text-gray-500 font-medium mb-6">
-                Senior Backend Engineer
-              </p>
-
-              <p className="text-gray-600 leading-relaxed mb-8 text-base max-w-md">
-                I design and build distributed systems, enterprise platforms,
-                identity infrastructure, and high-scale backend systems that
-                serve real users in production.
-              </p>
-
-              <div className="flex flex-wrap gap-3 mb-8">
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  View My Work <ArrowRight size={16} />
-                </a>
-                <a
-                  href="/Purushottam_Kunwar_CV.pdf"
-                  download
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  <Download size={15} /> Resume
-                </a>
-              </div>
-
-              <div className="flex items-center gap-5">
-                <a href="https://www.linkedin.com/in/purushottam-kunwar-543032179/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-blue-600 transition-colors">
-                  <LinkedinIcon />
-                </a>
-                <a href="https://github.com/purushottam-kunwar" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-gray-400 hover:text-gray-900 transition-colors">
-                  <GithubIcon />
-                </a>
-                <span className="flex items-center gap-1.5 text-sm text-gray-400">
-                  <MapPin size={13} /> Kathmandu, Nepal
-                </span>
-              </div>
+          {/* Left */}
+          <div className="pt-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full mb-8">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-sm text-green-700 font-medium">Open to remote roles worldwide</span>
             </div>
 
-            {/* Right — profile card */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-sm bg-gray-50 border border-gray-200 rounded-2xl p-8">
-                {/* Avatar */}
-                <div className="w-20 h-20 rounded-2xl bg-blue-600 flex items-center justify-center mb-6">
-                  <span className="text-3xl font-bold text-white">PK</span>
+            <h1 className="text-7xl font-extrabold text-gray-900 leading-none tracking-tight mb-5">
+              Hi, I&apos;m<br />
+              Purushottam<br />
+              <span className="text-blue-600">Kunwar</span>
+            </h1>
+
+            <p className="text-2xl text-gray-400 font-medium mb-6">Senior Backend Engineer</p>
+
+            <p className="text-gray-500 leading-relaxed mb-8 text-lg max-w-xl">
+              I design and build distributed systems, enterprise platforms,
+              identity infrastructure, and high-scale backend services
+              that serve real users in production — across fintech, govtech,
+              maritime, and logistics.
+            </p>
+
+            <div className="space-y-3 mb-10">
+              {HIGHLIGHTS.map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-3 text-gray-500">
+                  <Icon size={16} className="text-blue-500 shrink-0" />
+                  <span className="text-sm">{text}</span>
                 </div>
+              ))}
+            </div>
 
-                <h2 className="text-lg font-bold text-gray-900 mb-1">Purushottam Kunwar</h2>
-                <p className="text-sm text-gray-500 mb-6">Senior Backend Engineer · Kathmandu, Nepal</p>
+            <div className="flex flex-wrap gap-4 mb-10">
+              <a href="#projects" className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors text-base">
+                View My Work <ArrowRight size={18} />
+              </a>
+              <a href="/Purushottam_Kunwar_CV.pdf" download className="inline-flex items-center gap-2 px-7 py-3.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors text-base">
+                <Download size={16} /> Resume
+              </a>
+            </div>
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  {STATS.map(s => (
-                    <div key={s.label} className="bg-white rounded-xl p-4 border border-gray-100">
-                      <div className="text-xl font-bold text-blue-600">{s.value}</div>
-                      <div className="text-xs text-gray-400 mt-0.5">{s.label}</div>
-                    </div>
-                  ))}
+            <div className="flex items-center gap-5">
+              <a href="https://www.linkedin.com/in/purushottam-kunwar-543032179/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2.5 bg-gray-100 rounded-xl text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                <LinkedinIcon />
+              </a>
+              <a href="https://github.com/purushottam-kunwar" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2.5 bg-gray-100 rounded-xl text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors">
+                <GithubIcon />
+              </a>
+            </div>
+          </div>
+
+          {/* Right — info panel */}
+          <div className="flex flex-col gap-5">
+            {/* Profile card */}
+            <div className="bg-linear-to-br from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
+              <div className="flex items-start gap-5 mb-6">
+                <div className="w-20 h-20 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center shrink-0 overflow-hidden">
+                  <img
+                    src="/profile.jpg"
+                    alt="Purushottam Kunwar"
+                    className="w-full h-full object-cover"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                  />
+                  <span className="text-2xl font-bold text-white absolute">PK</span>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold mb-1">Purushottam Kunwar</h2>
+                  <p className="text-blue-200 text-sm mb-2">Senior Backend Engineer</p>
+                  <span className="inline-flex items-center gap-1.5 text-xs bg-green-500/20 border border-green-400/30 text-green-300 px-3 py-1 rounded-full">
+                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                    Available for remote
+                  </span>
                 </div>
               </div>
+              <p className="text-blue-100 text-sm leading-relaxed">
+                Backend-focused engineer who has shipped 8 enterprise systems across fintech, govtech, maritime, and logistics. Specialist in distributed systems, identity platforms, and high-throughput data pipelines.
+              </p>
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {STATS.map(s => (
+                <div key={s.label} className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                  <div className="text-4xl font-extrabold text-blue-600 mb-1">{s.value}</div>
+                  <div className="text-sm font-semibold text-gray-800 mb-0.5">{s.label}</div>
+                  <div className="text-xs text-gray-400">{s.sub}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tech stack row */}
+      {/* Tech stack strip */}
       <div className="border-t border-gray-100 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6 py-5">
+        <div className="w-full px-10 xl:px-16 py-5">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs text-gray-400 font-medium mr-2">Core Stack:</span>
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide mr-3">Core Stack</span>
             {STACK.map(t => (
               <span key={t} className="text-xs px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-lg font-medium">
                 {t}

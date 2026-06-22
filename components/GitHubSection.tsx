@@ -10,37 +10,21 @@ const GithubIcon = ({ size = 14 }: { size?: number }) => (
 );
 
 const LANG_DOT: Record<string, string> = {
-  JavaScript: "bg-yellow-400",
-  TypeScript: "bg-blue-500",
-  Python:     "bg-blue-400",
-  PHP:        "bg-indigo-400",
-  CSS:        "bg-purple-600",
-  Groovy:     "bg-orange-400",
-  Shell:      "bg-green-400",
-  Java:       "bg-orange-600",
-  HTML:       "bg-red-400",
+  JavaScript: "bg-yellow-400", TypeScript: "bg-blue-500", Python: "bg-blue-400",
+  PHP: "bg-indigo-400", CSS: "bg-purple-600", Groovy: "bg-orange-400",
+  Shell: "bg-green-400", Java: "bg-orange-600", HTML: "bg-red-400",
 };
 
 interface Repo {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  stargazers_count: number;
-  forks_count: number;
-  language: string | null;
-  updated_at: string;
+  id: number; name: string; description: string | null;
+  html_url: string; stargazers_count: number; forks_count: number;
+  language: string | null; updated_at: string;
 }
-
-interface GitHubUser {
-  public_repos: number;
-  followers: number;
-}
+interface GitHubUser { public_repos: number; followers: number; }
 
 function relTime(iso: string) {
   const d = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
-  if (d < 1)  return "today";
-  if (d < 7)  return `${d}d ago`;
+  if (d < 1) return "today"; if (d < 7) return `${d}d ago`;
   if (d < 30) return `${Math.floor(d / 7)}w ago`;
   if (d < 365) return `${Math.floor(d / 30)}mo ago`;
   return `${Math.floor(d / 365)}y ago`;
@@ -55,8 +39,8 @@ export default function GitHubSection() {
   useEffect(() => {
     const BASE = "https://api.github.com/users/purushottam-kunwar";
     Promise.all([
-      fetch(BASE).then((r) => r.json()),
-      fetch(`${BASE}/repos?sort=updated&per_page=6`).then((r) => r.json()),
+      fetch(BASE).then(r => r.json()),
+      fetch(`${BASE}/repos?sort=updated&per_page=6`).then(r => r.json()),
     ])
       .then(([u, r]) => {
         if (u.login) setUser(u);
@@ -68,38 +52,34 @@ export default function GitHubSection() {
 
   return (
     <section id="github" className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-10">
-          <p className="text-sm font-medium text-blue-600 mb-2">Open Source</p>
+      <div className="w-full px-10 xl:px-16">
+        <div className="mb-14">
+          <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide mb-3">Open Source</p>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">GitHub repositories</h2>
-              {user && (
-                <p className="text-sm text-gray-400">{user.public_repos} public repos · {user.followers} followers</p>
-              )}
+              <h2 className="text-5xl font-bold text-gray-900 mb-3">GitHub repositories</h2>
+              {user && <p className="text-gray-400">{user.public_repos} public repos · {user.followers} followers</p>}
             </div>
             <a
               href="https://github.com/purushottam-kunwar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm border border-gray-200 text-gray-600 rounded-lg hover:border-blue-300 hover:text-blue-600 transition-colors shrink-0"
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm border border-gray-200 text-gray-600 rounded-xl hover:border-blue-300 hover:text-blue-600 transition-colors shrink-0"
             >
-              <GithubIcon size={14} />
-              @purushottam-kunwar
+              <GithubIcon size={15} /> @purushottam-kunwar
             </a>
           </div>
         </div>
 
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="h-36 bg-gray-100 rounded-xl animate-pulse" />
+              <div key={i} className="h-44 bg-gray-100 rounded-2xl animate-pulse" />
             ))}
           </div>
         )}
 
         {error && (
-          <div className="text-sm text-gray-500 border border-gray-200 rounded-xl p-6">
+          <div className="text-gray-500 border border-gray-200 rounded-2xl p-8">
             Could not reach GitHub API.{" "}
             <a href="https://github.com/purushottam-kunwar" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
               View profile directly →
@@ -108,43 +88,32 @@ export default function GitHubSection() {
         )}
 
         {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {repos.map((repo) => (
               <a
                 key={repo.id}
                 href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col p-5 bg-white border border-gray-200 rounded-xl hover:border-blue-200 hover:shadow-sm transition-all duration-200"
+                target="_blank" rel="noopener noreferrer"
+                className="group flex flex-col p-7 bg-gray-50 border border-gray-200 rounded-2xl hover:border-blue-200 hover:shadow-sm transition-all duration-200"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {repo.name}
-                  </span>
-                  <ExternalLink size={12} className="shrink-0 text-gray-300 group-hover:text-blue-400 transition-colors mt-0.5" />
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-base font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{repo.name}</span>
+                  <ExternalLink size={14} className="shrink-0 text-gray-300 group-hover:text-blue-400 transition-colors mt-0.5" />
                 </div>
-
-                <p className="text-xs text-gray-400 leading-relaxed flex-1 mb-4">
-                  {repo.description ?? "No description provided."}
-                </p>
-
-                <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                  <div className="flex items-center gap-3">
+                <p className="text-sm text-gray-400 leading-relaxed flex-1 mb-5">{repo.description ?? "No description provided."}</p>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-200">
+                  <div className="flex items-center gap-4">
                     {repo.language && (
                       <span className="flex items-center gap-1.5 text-xs text-gray-400">
-                        <span className={`w-2 h-2 rounded-full ${LANG_DOT[repo.language] ?? "bg-gray-400"}`} />
+                        <span className={`w-2.5 h-2.5 rounded-full ${LANG_DOT[repo.language] ?? "bg-gray-400"}`} />
                         {repo.language}
                       </span>
                     )}
                     {repo.stargazers_count > 0 && (
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
-                        <Star size={10} /> {repo.stargazers_count}
-                      </span>
+                      <span className="flex items-center gap-1 text-xs text-gray-400"><Star size={11} /> {repo.stargazers_count}</span>
                     )}
                     {repo.forks_count > 0 && (
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
-                        <GitFork size={10} /> {repo.forks_count}
-                      </span>
+                      <span className="flex items-center gap-1 text-xs text-gray-400"><GitFork size={11} /> {repo.forks_count}</span>
                     )}
                   </div>
                   <span className="text-xs text-gray-300">{relTime(repo.updated_at)}</span>
