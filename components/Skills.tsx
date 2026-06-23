@@ -2,34 +2,33 @@
 
 import { SKILLS } from "@/lib/data";
 
-const GROUPS: { key: keyof typeof SKILLS; label: string; description: string }[] = [
-  { key: "backend",   label: "Backend",          description: "Languages, frameworks, and runtimes" },
-  { key: "databases", label: "Databases",         description: "Relational, NoSQL, and caching" },
-  { key: "cloud",     label: "Cloud & DevOps",    description: "Infrastructure, CI/CD, and containers" },
-  { key: "protocols", label: "Protocols & APIs",  description: "Communication standards and patterns" },
-  { key: "frontend",  label: "Frontend",          description: "UI frameworks and tooling" },
+const GROUPS: { key: keyof typeof SKILLS; label: string }[] = [
+  { key: "backend",   label: "Backend" },
+  { key: "databases", label: "Databases" },
+  { key: "cloud",     label: "Cloud & DevOps" },
+  { key: "protocols", label: "APIs & Protocols" },
+  { key: "frontend",  label: "Frontend" },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-gray-50 border-y border-gray-100">
-      <div className="w-full px-10 xl:px-16">
-        <div className="mb-14">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide mb-3">Technology</p>
-          <h2 className="text-5xl font-bold text-gray-900 mb-4">Technical expertise</h2>
-          <p className="text-gray-400 text-xl">Technologies I use in production — grouped by domain. No skill bars, no percentages.</p>
+    <section id="skills" className="py-28 bg-[#050505] border-y border-white/5">
+      <div className="w-full px-8 xl:px-16">
+        <div className="mb-16">
+          <p className="text-xs font-semibold text-[#00f5d4] uppercase tracking-widest mb-4">Stack</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#e5e5e5] mb-4">Tech Stack</h2>
+          <p className="text-[#737373] text-lg">Technologies I use in production — no skill bars, no percentages.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GROUPS.map(({ key, label, description }) => (
-            <div key={key} className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-              <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-1">{label}</p>
-              <p className="text-sm text-gray-400 mb-6">{description}</p>
+        <div className="space-y-8">
+          {GROUPS.map(({ key, label }) => (
+            <div key={key} className="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-4 lg:gap-10 items-start">
+              <p className="text-xs font-semibold text-[#383838] uppercase tracking-widest lg:pt-2.5">{label}</p>
               <div className="flex flex-wrap gap-2.5">
-                {SKILLS[key].map((tech) => (
+                {SKILLS[key].map(tech => (
                   <span
                     key={tech}
-                    className="text-sm px-3 py-1.5 bg-gray-50 text-gray-700 border border-gray-200 rounded-lg hover:border-blue-200 hover:text-blue-600 transition-colors"
+                    className="text-sm px-4 py-2 bg-white/4 border border-white/8 text-[#a3a3a3] rounded-lg hover:border-[#00f5d4]/25 hover:text-[#e5e5e5] transition-all cursor-default"
                   >
                     {tech}
                   </span>

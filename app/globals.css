@@ -3,14 +3,22 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: #ffffff;
-  color: #111827;
+  background: #0a0a0a;
+  color: #e5e5e5;
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #f9fafb; }
-::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #00f5d4; }
+::selection { background: rgba(0,245,212,0.15); color: #00f5d4; }
 
-::selection { background: #dbeafe; color: #1e40af; }
+.pv-sso-gateway      { background: radial-gradient(ellipse at top right, rgba(139,92,246,0.18) 0%, transparent 70%), #0f0a1a; }
+.pv-fleetpro         { background: radial-gradient(ellipse at top right, rgba(0,245,212,0.14) 0%, transparent 70%), #0a1210; }
+.pv-pims             { background: radial-gradient(ellipse at top right, rgba(245,158,11,0.14) 0%, transparent 70%), #110f00; }
+.pv-yacht-cloud      { background: radial-gradient(ellipse at top right, rgba(59,130,246,0.18) 0%, transparent 70%), #0a0e1a; }
+.pv-nemccu           { background: radial-gradient(ellipse at top right, rgba(16,185,129,0.14) 0%, transparent 70%), #0a1210; }
+.pv-listen-on-repeat { background: radial-gradient(ellipse at top right, rgba(0,180,255,0.14) 0%, transparent 70%), #0a0e15; }
+.pv-default          { background: #111111; }
